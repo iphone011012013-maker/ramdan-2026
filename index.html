@@ -325,7 +325,7 @@
         // مشاركة (تم توحيد الدومين ليكون متوافق مع CC.html)
         async function shareGreeting() {
             const name = nameInput.value.trim();
-            const baseUrl = "https://ramadan-2027.netlify.app/cc.html"; // الدومين الأساسي
+            const baseUrl = "https://ramdan-2026.netlify.app/cc.html"; // الدومين الأساسي
             const finalUrl = name ? `${baseUrl}?name=${name}` : baseUrl;
             const textToShare = name 
                 ? `بطاقة تهنئة من ${name} بمناسبة رمضان ${targetYearInt}! 🌙`
@@ -342,7 +342,7 @@
 
         function copyLinkOnly() {
             const name = nameInput.value.trim();
-            const baseUrl = "https://ramadan-2027.netlify.app/cc.html";
+            const baseUrl = "https://ramdan-2026.netlify.app/cc.html";
             const finalUrl = name ? `${baseUrl}?name=${name}` : baseUrl;
             copyToClipboard(finalUrl, document.getElementById('copyBtn'));
         }
