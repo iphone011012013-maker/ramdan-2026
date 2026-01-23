@@ -353,16 +353,16 @@
             updateGreeting(name);
         });
 
-        // --- 4. Share Function ---
+                // --- 4. Share Function ---
         async function shareGreeting() {
             const name = nameInput.value.trim();
             
-            // The specific URL requested
+            // الرابط الأساسي كما هو في الكود الخاص بك
             const baseUrl = "https://ramdan-2026.netlify.app/cc.html";
             
-            // Generate link: appends ?name=YourName
+            // التعديل هنا: تم إزالة encodeURIComponent ليظهر الاسم كما هو بالعربية
             const finalUrl = name 
-                ? `${baseUrl}?name=${encodeURIComponent(name)}`
+                ? `${baseUrl}?name=${name}`
                 : baseUrl;
 
             const textToShare = name 
@@ -384,7 +384,7 @@
                 // Fallback to Clipboard
                 try {
                     await navigator.clipboard.writeText(textToShare + "\n" + finalUrl);
-                    // Simple custom notification instead of alert (cleaner UI)
+                    
                     const btn = document.querySelector('button');
                     const originalText = btn.innerHTML;
                     btn.innerHTML = `<span>تم نسخ الرابط!</span> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
@@ -398,6 +398,7 @@
                 }
             }
         }
+
     </script>
 </body>
 </html>
