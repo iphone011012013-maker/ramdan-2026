@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تهنئة رمضان 2026 - 1447 هـ</title>
+    <!-- Tailwind CSS for Styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Font Setup */
+        body {
+            font-family: 'Amiri', serif;
+            overflow-x: hidden;
+            background-color: #050505; /* Blackish background */
+        }
+        
+        .font-kufi {
+            font-family: 'Reem Kufi', sans-serif;
+        }
+
+        /* Lantern Animation */
+        @keyframes swing {
+            0% { transform: rotate(3deg); }
+            50% { transform: rotate(-3deg); }
+            100% { transform: rotate(3deg); }
+        }
+        
+        .lantern-anim {
+            transform-origin: top center;
+            animation: swing 3s infinite ease-in-out;
+        }
+
+        /* Glow Effects */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(234, 179, 8, 0.5), 0 0 20px rgba(234, 179, 8, 0.3);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        /* Input Styling */
+        .custom-input:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen relative text-white selection:bg-yellow-500 selection:text-black">
+
+    <!-- Background Canvas for Stars -->
+    <canvas id="starCanvas" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+    <!-- Main Container -->
+    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4">
+        
+        <!-- Decorative Top Lanterns -->
+        <div class="absolute top-0 w-full flex justify-center gap-20 pointer-events-none overflow-hidden h-40">
+            <!-- Left Lantern -->
+            <div class="lantern-anim relative -top-5 w-16 md:w-20">
+                <svg viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_0_15px_rgba(255,215,0,0.6)]">
+                    <path d="M50 0V20" stroke="#FBBF24" stroke-width="2"/>
+                    <path d="M30 20H70L80 50H20L30 20Z" fill="#1e1e1e" stroke="#FBBF24" stroke-width="2"/>
+                    <rect x="20" y="50" width="60" height="80" rx="5" fill="#1e1e1e" stroke="#FBBF24" stroke-width="2"/>
+                    <path d="M20 130L30 150H70L80 130H20Z" fill="#1e1e1e" stroke="#FBBF24" stroke-width="2"/>
+                    <circle cx="50" cy="90" r="10" fill="#FBBF24" class="animate-pulse"/>
+                </svg>
+            </div>
+            <!-- Right Lantern (Smaller) -->
+            <div class="lantern-anim relative -top-10 delay-75 w-12 md:w-16" style="animation-delay: 1s;">
+                <svg viewBox="0 0 100 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-[0_0_15px_rgba(255,215,0,0.6)]">
+                    <path d="M50 0V20" stroke="#FBBF24" stroke-width="2"/>
+                    <path d="M30 20H70L80 50H20L30 20Z" fill="#1e1e1e" stroke="#FBBF24" stroke-width="2"/>
+                    <rect x="20" y="50" width="60" height="80" rx="5" fill="#1e1e1e" stroke="#FBBF24" stroke-width="2"/>
+                    <path d="M20 130L30 150H70L80 130H20Z" fill="#1e1e1e" stroke="#FBBF24" stroke-width="2"/>
+                    <circle cx="50" cy="90" r="10" fill="#FBBF24" class="animate-pulse"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Card Content -->
+        <main class="glass-card w-full max-w-lg rounded-3xl p-8 text-center mt-10 md:mt-0 transition-all duration-300 transform hover:scale-[1.01]">
+            
+            <!-- Moon Icon -->
+            <div class="flex justify-center mb-6">
+                <svg class="w-24 h-24 text-yellow-400 drop-shadow-[0_0_20px_rgba(250,204,21,0.6)]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C9.40871 2.00392 6.88371 2.87116 4.90999 4.46999C7.7562 5.56821 9.8728 8.08535 10.37 11.109C10.8672 14.1326 9.68478 17.2917 7.24999 19.26C9.13083 20.9701 11.6025 21.9328 14.14 21.9698C16.6775 22.0069 19.109 21.1158 20.979 19.462C22.8489 17.8081 24.0306 15.5034 24.303 13.003C24.5755 10.5026 23.921 8.00636 22.46 5.96999C20.6953 7.82862 18.2718 8.89205 15.72 8.92999C13.1682 8.96794 10.686 7.9774 8.81999 6.17999C9.89704 4.70017 11.2334 3.47353 12.76 2.56999L12 2Z"/>
+                </svg>
+            </div>
+
+            <!-- Titles -->
+            <h2 class="text-xl text-gray-300 font-kufi mb-2">أهلاً بقدوم شهر الخير</h2>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 gold-gradient leading-tight py-2">رمضان كريم</h1>
+            <p class="text-lg text-yellow-100/80 mb-6">عام ٢٠٢٦ م - ١٤٤٧ هـ</p>
+
+            <!-- Personalized Greeting Area -->
+            <div id="greetingArea" class="mb-8 min-h-[3rem]">
+                <p class="text-xl md:text-2xl text-white font-medium" id="dynamicGreeting">
+                    تقبل الله منا ومنكم صالح الأعمال
+                </p>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="grid grid-cols-4 gap-2 mb-8" dir="ltr">
+                <div class="bg-black/40 p-2 rounded-lg border border-yellow-500/30">
+                    <span id="days" class="block text-2xl font-bold text-yellow-400">00</span>
+                    <span class="text-xs text-gray-400">يوم</span>
+                </div>
+                <div class="bg-black/40 p-2 rounded-lg border border-yellow-500/30">
+                    <span id="hours" class="block text-2xl font-bold text-yellow-400">00</span>
+                    <span class="text-xs text-gray-400">ساعة</span>
+                </div>
+                <div class="bg-black/40 p-2 rounded-lg border border-yellow-500/30">
+                    <span id="minutes" class="block text-2xl font-bold text-yellow-400">00</span>
+                    <span class="text-xs text-gray-400">دقيقة</span>
+                </div>
+                <div class="bg-black/40 p-2 rounded-lg border border-yellow-500/30">
+                    <span id="seconds" class="block text-2xl font-bold text-yellow-400">00</span>
+                    <span class="text-xs text-gray-400">ثانية</span>
+                </div>
+            </div>
+
+            <!-- User Input -->
+            <div class="space-y-4">
+                <div class="relative">
+                    <input type="text" id="nameInput" placeholder="أدخل اسمك هنا..." 
+                        class="custom-input w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-center text-white placeholder-gray-500 transition-all">
+                </div>
+                
+                <div class="flex gap-2">
+                    <button onclick="shareGreeting()" class="flex-1 bg-yellow-600 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-xl transition-colors duration-300 flex items-center justify-center gap-2">
+                        <span>مشاركة التهنئة</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-gray-500 text-sm font-kufi">
+            تم التصميم بواسطة <span class="text-yellow-600 font-bold">محمود إبراهيم</span>
+        </footer>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Canvas Star Animation ---
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let stars = [];
+        const numStars = 200;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = (Math.random() - 0.5) * 0.2; // Very slow drift
+                this.speedY = (Math.random() - 0.5) * 0.2;
+                this.opacity = Math.random();
+                this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Wrap around screen
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+
+                // Twinkle effect
+                this.opacity += this.twinkleSpeed;
+                if (this.opacity > 1 || this.opacity < 0.2) {
+                    this.twinkleSpeed = -this.twinkleSpeed;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < numStars; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animateStars);
+        }
+
+        initStars();
+        animateStars();
+
+
+        // --- 2. Countdown Timer (Target: Estimated Ramadan 2026 - Feb 18, 2026) ---
+        // Note: Dates depend on moon sighting. Using estimation.
+        const ramadanDate = new Date("February 18, 2026 00:00:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = ramadanDate - now;
+
+            if (distance < 0) {
+                // If date passed
+                document.getElementById("days").innerText = "00";
+                document.getElementById("hours").innerText = "00";
+                document.getElementById("minutes").innerText = "00";
+                document.getElementById("seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+
+
+        // --- 3. Dynamic Greeting Logic ---
+        const nameInput = document.getElementById('nameInput');
+        const dynamicGreeting = document.getElementById('dynamicGreeting');
+        const originalText = "تقبل الله منا ومنكم صالح الأعمال";
+
+        // Check URL parameters on load (Auto-fill name from link)
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nameFromUrl = urlParams.get('name');
+            
+            if (nameFromUrl) {
+                // Set the input value and trigger the update
+                nameInput.value = nameFromUrl;
+                updateGreeting(nameFromUrl);
+            }
+        });
+
+        function updateGreeting(name) {
+            if (name) {
+                dynamicGreeting.innerHTML = `تهنئة خاصة من <br><span class="text-yellow-400 font-bold text-3xl mt-2 block">${name}</span>`;
+            } else {
+                dynamicGreeting.innerText = originalText;
+            }
+        }
+
+        nameInput.addEventListener('input', function(e) {
+            const name = e.target.value.trim();
+            updateGreeting(name);
+        });
+
+        // --- 4. Share Function ---
+        async function shareGreeting() {
+            const name = nameInput.value.trim();
+            
+            // The specific URL requested
+            const baseUrl = "https://ramdan-2026.netlify.app/cc.html";
+            
+            // Generate link: appends ?name=YourName
+            const finalUrl = name 
+                ? `${baseUrl}?name=${encodeURIComponent(name)}`
+                : baseUrl;
+
+            const textToShare = name 
+                ? `بطاقة تهنئة خاصة من ${name} بمناسبة شهر رمضان 2026! 🌙✨`
+                : `كل عام وأنتم بخير بمناسبة شهر رمضان 2026! 🌙✨`;
+            
+            // Try Native Share API first (Mobile)
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'تهنئة رمضان 2026',
+                        text: textToShare,
+                        url: finalUrl
+                    });
+                } catch (err) {
+                    console.log('Share failed:', err);
+                }
+            } else {
+                // Fallback to Clipboard
+                try {
+                    await navigator.clipboard.writeText(textToShare + "\n" + finalUrl);
+                    // Simple custom notification instead of alert (cleaner UI)
+                    const btn = document.querySelector('button');
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = `<span>تم نسخ الرابط!</span> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                    btn.classList.replace('bg-yellow-600', 'bg-green-600');
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.replace('bg-green-600', 'bg-yellow-600');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Clipboard failed', err);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+
