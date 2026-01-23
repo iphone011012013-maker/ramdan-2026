@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رسالة خاصة لك</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #050505;
+            color: #fff;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* خلفية الصورة المخصصة */
+        .bg-pattern {
+            /* تم التعديل لاستخدام الصورة المطلوبة */
+            background-image: url('ramadan.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.5; /* شفافية الصورة لضمان وضوح النص */
+        }
+
+        .gold-text {
+            color: #d4af37;
+            background: linear-gradient(to bottom, #fcf6ba, #bf953f, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .glass-panel {
+            background: rgba(0, 0, 0, 0.6); /* زيادة التعتيم قليلاً ليتناسب مع الخلفية الملونة */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .dua-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-right: 3px solid #d4af37;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-family: 'Reem Kufi', sans-serif;
+        }
+
+        .animate-up {
+            animation: slideUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center relative py-10">
+
+    <!-- Background Decoration -->
+    <div class="absolute inset-0 bg-pattern z-0"></div>
+    <!-- طبقة تظليل إضافية لتحسين القراءة فوق الصورة -->
+    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black via-black/40 to-black z-0 pointer-events-none"></div>
+
+    <!-- Main Card -->
+    <main class="relative z-10 w-11/12 max-w-md mx-auto">
+        <div class="glass-panel rounded-2xl p-8 text-center border-t-4 border-yellow-600">
+            
+            <!-- الهلال (أيقونة بسيطة) -->
+            <div class="mb-6 flex justify-center animate-up" style="animation-delay: 0.2s;">
+                <svg class="w-16 h-16 text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </div>
+
+            <!-- رسالة المرسل -->
+             <div class="animate-up mb-6" style="animation-delay: 0.3s;">
+                <h3 class="text-xl md:text-2xl font-bold leading-relaxed text-gray-200">
+                    <span id="senderNameDisplay" class="gold-text font-bold"></span> 
+                    <br>
+                    <span class="text-base text-gray-300 font-normal">حابب يبلغك بقدوم شهر رمضان الكريم</span>
+                </h3>
+            </div>
+
+            <!-- العداد -->
+            <div id="countdownContainer" class="animate-up" style="animation-delay: 0.5s;">
+                <!-- سيتم حقن المحتوى هنا -->
+            </div>
+
+            <!-- الدعاء اليومي -->
+            <div id="dailyDuaContainer" class="hidden animate-up" style="animation-delay: 0.7s;">
+                <div class="dua-card text-right">
+                    <p class="text-xs text-yellow-500 mb-2 font-bold">✨ دعوة لك اليوم:</p>
+                    <p id="duaText" class="text-lg text-white leading-relaxed">
+                        <!-- نص الدعاء هنا -->
+                    </p>
+                </div>
+                <p class="text-xs text-gray-400 mt-2">تتجدد الدعوة يومياً حتى رمضان</p>
+            </div>
+
+            <!-- محتوى الرسالة النهائية (يوم الوقفة) -->
+            <div id="finalMessage" class="hidden animate-up">
+                 <!-- سيظهر يوم العيد/رمضان -->
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. استخراج الاسم
+            const params = new URLSearchParams(window.location.search);
+            const sender = params.get('name') || "فاعل خير";
+            
+            // وضع الاسم في بداية الجملة
+            document.getElementById('senderNameDisplay').innerText = sender;
+
+            // 2. إعداد التواريخ
+            const ramadanDate = new Date("February 18, 2026").getTime();
+            const today = new Date().getTime();
+            const diffTime = ramadanDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            // 3. قائمة الأدعية (أكثر من 30 دعاء ليغطي الأيام)
+            const duas = [
+                "اللهم بلغنا رمضان ونحن في أحسن حال.",
+                "اللهم اجعلنا ممن تدركهم الرحمة والمغفرة والعتق من النار.",
+                "يا رب اجبر خواطرنا وحقق أمانينا قبل قدوم شهرك الكريم.",
+                "اللهم سلمنا لرمضان وسلم رمضان لنا وتسلمه منا متقبلاً.",
+                "اللهم ارزقنا في الأيام القادمة فرحة تنسينا كل حزن.",
+                "اللهم اهدِ قلوبنا وأصلح أحوالنا.",
+                "يا رب اجعل هذا الشهر بداية لكل خير ونهاية لكل شر.",
+                "اللهم اغفر لنا ولوالدينا وللمسلمين أجمعين.",
+                "اللهم بارك لنا في أرزاقنا وأعمارنا.",
+                "اللهم اشفِ كل مريض وارحم كل ميت.",
+                "اللهم ارزقنا توبة نصوحة قبل الموت.",
+                "يا مقلب القلوب ثبت قلوبنا على دينك.",
+                "اللهم اكفنا بحلالك عن حرامك وأغننا بفضلك عمن سواك.",
+                "اللهم ارزقنا زيارة بيتك الحرام.",
+                "اللهم لا تدع لنا ذنباً إلا غفرته ولا هماً إلا فرجته.",
+                "اللهم اجعل القرآن ربيع قلوبنا ونور صدورنا.",
+                "يا رب ارزقنا حسن الخاتمة.",
+                "اللهم احفظ أحبتنا واجمعنا بهم في جنات النعيم.",
+                "اللهم انصر المستضعفين في كل مكان.",
+                "اللهم اجعلنا من الذاكرين الشاكرين.",
+                "اللهم ارزقنا الإخلاص في القول والعمل.",
+                "اللهم اعنا على ذكرك وشكرك وحسن عبادتك.",
+                "اللهم حبب إلينا الإيمان وزينه في قلوبنا.",
+                "اللهم جنبنا الفواحش ما ظهر منها وما بطن.",
+                "اللهم ارزقنا علماً نافعاً ورزقاً طيباً وعملاً متقبلاً.",
+                "اللهم اجعلنا مفاتيح للخير مغاليق للشر.",
+                "اللهم استرنا فوق الأرض وتحت الأرض ويوم العرض عليك.",
+                "اللهم اجعل قبورنا روضة من رياض الجنة.",
+                "يا حي يا قيوم برحمتك نستغيث أصلح لنا شأننا كله.",
+                "اللهم صل وسلم وبارك على سيدنا محمد."
+            ];
+
+            // اختيار دعاء بناءً على اليوم (حتى يتغير كل يوم ولا يتغير عند تحديث الصفحة في نفس اليوم)
+            // نستخدم diffDays كمؤشر، أو يوم السنة لضمان التغير اليومي
+            // استخدام diffDays يضمن أنه كلما اقترب العد التنازلي، تغير الدعاء
+            const duaIndex = Math.abs(diffDays) % duas.length;
+            const todaysDua = duas[duaIndex];
+
+            // 4. المنطق الشرطي للعرض
+            const countdownContainer = document.getElementById('countdownContainer');
+            const dailyDuaContainer = document.getElementById('dailyDuaContainer');
+            const finalMessage = document.getElementById('finalMessage');
+            const duaText = document.getElementById('duaText');
+
+            if (diffDays <= 1) {
+                // حالة حلول رمضان أو قبلها بيوم
+                countdownContainer.style.display = 'none';
+                dailyDuaContainer.style.display = 'none';
+                finalMessage.style.display = 'block';
+                
+                finalMessage.innerHTML = `
+                    <div class="space-y-4 mt-4">
+                        <p class="text-gray-300 text-lg font-light leading-relaxed">
+                            لأنك غالي عندي..
+                        </p>
+                        <h2 class="text-2xl md:text-3xl font-bold text-white leading-normal">
+                            حبيت أكون أول واحد يقولك<br>
+                            <span class="gold-text text-4xl mt-2 block py-2">كل سنة وأنت طيب</span>
+                        </h2>
+                        <p class="text-gray-300 text-lg font-light">
+                            بمناسبة قدوم شهر رمضان المبارك
+                        </p>
+                    </div>
+                `;
+            } else {
+                // حالة العداد
+                countdownContainer.innerHTML = `
+                    <p class="text-gray-400 mb-2">باقي حوالي</p>
+                    <div class="flex justify-center items-baseline gap-2 dir-ltr">
+                        <span class="text-5xl md:text-6xl font-black text-yellow-500 drop-shadow-lg font-mono">
+                            ${diffDays}
+                        </span>
+                        <span class="text-xl text-gray-400">يوم</span>
+                    </div>
+                `;
+                
+                // إظهار الدعاء
+                duaText.innerText = todaysDua;
+                dailyDuaContainer.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
+
+
